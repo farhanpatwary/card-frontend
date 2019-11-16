@@ -3,9 +3,9 @@ import Cookies from 'universal-cookie';
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
+import Dropdown from 'react-bootstrap/Dropdown'
+
+import ButtonGroup from 'react-bootstrap/Button'
 import Button from 'react-bootstrap/Button'
 
 class NavbarComponent extends Component {
@@ -32,57 +32,42 @@ class NavbarComponent extends Component {
         'float':'center'
     }
 
-    dropdown = ()=> {
+    nav = ()=> {
         if(this.props.signed_in === true){
             return (
-                <Nav className="mr-auto">
-                    <Nav.Link href="/createpost">Create Post</Nav.Link> 
-                    <NavDropdown title={this.props.current_user} style={this.dropdownStyle} id="basic-nav-dropdown">   
-                        <NavDropdown.Item onClick={this.logOut}>Log Out</NavDropdown.Item>
-                        <NavDropdown.Item href="/settings">User Settings</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Header>More Stuff</NavDropdown.Header>
-                        <NavDropdown.Item href="/about">About</NavDropdown.Item>
-                    </NavDropdown>           
+                <Nav className="justify-content-center">  
+                    <Nav.Link href="#memes">My Account</Nav.Link>
+                    <Nav.Link href="#memes">Settings</Nav.Link>
+                    <Nav.Link href="#deets">Log Out</Nav.Link>
                 </Nav>
             )
         }
         else{
             return (
-                <Nav className="mr-auto">
-                    <NavDropdown title="Options" style={this.dropdownStyle} id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/login">Log in</NavDropdown.Item>
-                        <NavDropdown.Item href="/signupform">Sign Up</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Header>More Stuff</NavDropdown.Header>
-                        <NavDropdown.Item href="/about">About</NavDropdown.Item>
-                    </NavDropdown>     
+                <Nav className="justify-content-center">
+                    <Nav.Link href="#deets">Sign Up</Nav.Link>
+                    <Nav.Link href="#memes">Sign In</Nav.Link>
                 </Nav>
             )
         }  
     }
+
     render() {
         return (
-            <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/">Giraffe</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Nav className="mr-auto">
-                    <NavDropdown title={this.props.current_tab} id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.2">Popular</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.1">All</NavDropdown.Item>
-                    </NavDropdown>
                 </Nav>
-                <Nav fill className="mr-auto">
-                    <Form inline>
-                        <FormControl  type="text"  placeholder="Search Giraffe.." className="input-large search-query" />
-                        <Button variant="outline-primary">Search</Button>
-                    </Form>
+            <Navbar.Brand href="#home"> Card </Navbar.Brand>
+            <Nav className="mr-auto">
+                </Nav>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
                 </Nav>
                 <Nav className="mr-auto">
-                    {this.dropdown()}
                 </Nav>
-                </Navbar.Collapse>
+                {this.nav()}  
+            </Navbar.Collapse>
             </Navbar>
             )
         }    
