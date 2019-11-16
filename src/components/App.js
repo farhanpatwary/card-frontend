@@ -61,7 +61,6 @@ class App extends Component {
             signed_in={this.state.signed_in}
             />
           )}/>
-          <Route path='/createpost' component={CreatePost} />
           <Route path='/users/:id' component={UserPage}/>
           <Route path='/settings' render={(props)=> (
             <UserSettings {...props}
