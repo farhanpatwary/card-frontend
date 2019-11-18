@@ -3,11 +3,6 @@ import Cookies from 'universal-cookie';
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Dropdown from 'react-bootstrap/Dropdown'
-
-import ButtonGroup from 'react-bootstrap/Button'
-import Button from 'react-bootstrap/Button'
-
 class NavbarComponent extends Component {
     constructor(props) {
         super(props);
@@ -19,18 +14,10 @@ class NavbarComponent extends Component {
         cookies.remove('token');
         this.props.signOut()
     }
-    searchBarStyle = {
-        'marginLeft':'100px',
-        'marginRight':'100px',
-        'width':'600px',
-        'float':'center'
+    optionstyle = {
+        'text-align':'center'
     }
-    dropdownStyle = {
-        'marginLeft':'100px',
-        'marginRight':'100px',
-        'width':'100px',
-        'float':'center'
-    }
+
 
     nav = ()=> {
         if(this.props.signed_in === true){
@@ -45,8 +32,8 @@ class NavbarComponent extends Component {
         else{
             return (
                 <Nav className="justify-content-center">
-                    <Nav.Link href="#deets">Sign Up</Nav.Link>
-                    <Nav.Link href="#memes">Sign In</Nav.Link>
+                    <Nav.Link href="#deets" style={this.optionstyle} >Sign Up</Nav.Link>
+                    <Nav.Link href="#memes" style={this.optionstyle} >Sign In</Nav.Link>
                 </Nav>
             )
         }  
@@ -54,13 +41,14 @@ class NavbarComponent extends Component {
 
     render() {
         return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg"  bg="dark" variant="dark">
                 <Nav className="mr-auto">
                 </Nav>
-            <Navbar.Brand href="#home"> Card </Navbar.Brand>
+            <Navbar.Brand href="#home">Card</Navbar.Brand>
+            <Navbar.Toggle/>
             <Nav className="mr-auto">
                 </Nav>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                 </Nav>
