@@ -13,13 +13,7 @@ export class Contacts extends Component {
         };
     }
     componentDidMount(){
-        const url = ``
-        fetch(url)
-        .then((data)=>(data.json()))
-        .then((data) => this.setState({
-            posts: data,
-            loaded: true
-        }))
+            
     }
 
 
