@@ -4,11 +4,12 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router-dom';
+
 export default class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            personal_email: '',
             password: '',
             correctCredentials: false,
         };
@@ -31,10 +32,10 @@ export default class LoginForm extends Component {
             return
         }
         const formdata = {
-            email: this.state.email,
+            personal_email: this.state.personal_email,
             password: this.state.password
         }
-        fetch('https://serene-escarpment-90033.herokuapp.com/users/login', {
+        fetch('http://localhost:8000/users/login', {
                 method: 'POST',
                 body: JSON.stringify(formdata),
                 credentials: 'same-origin',
@@ -43,6 +44,7 @@ export default class LoginForm extends Component {
                 }
             })
             .then((data) => {
+                console.log(data)
                 if (data.ok === true) {
                     this.setState({
                         correctCredentials: true
@@ -51,11 +53,13 @@ export default class LoginForm extends Component {
                 data.json()
                     .then((jsondata) => {
                         const cookies = new Cookies();
-                        cookies.set('token', jsondata.token);
-                        cookies.set('user', jsondata.user.name);
                         if (this.state.correctCredentials === true) {
+                            cookies.set('token', jsondata.token);
+                            cookies.set('user', jsondata.user.name);
+                            cookies.set('personal_email', jsondata.user.personal_email);
+                            cookies.set('work_email', jsondata.user.work_email);
+                            cookies.set('short', jsondata.user.short);            
                             return this.props.signIn()
-                            //return this.props.history.push('/')
                         }
                     })
                     .catch((e) => (alert(e)))
@@ -71,14 +75,11 @@ export default class LoginForm extends Component {
             return (   
                 <Container>
                     <br/>
-                    <h3>Log In to Giraffe</h3>
+                    <h3>Log In to Card</h3>
                     <Form onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="email">
-                            <Form.Label>Email address</Form.Label>
+                        <Form.Group controlId="personal_email">
+                            <Form.Label>Personal Email Address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" onChange={this.handleChange} />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="password">
                             <Form.Label>Password</Form.Label>

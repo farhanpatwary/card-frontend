@@ -10,7 +10,9 @@ export default class SignUpForm extends Component {
         super(props);
         this.state = {
             name: '',
-            email: '',
+            personal_email: '',
+            work_email: '',
+            phone_number: '',
             password: '',
         };
         this.handleChange = this.handleChange.bind(this);
@@ -33,10 +35,12 @@ export default class SignUpForm extends Component {
         }
         let formdata = {
             name:this.state.name,
-            email: this.state.email,
+            personal_email: this.state.personal_email,
+            work_email: this.state.work_email,
+            phone_number: this.state.phone_number,
             password: this.state.password
         }
-        fetch('https://serene-escarpment-90033.herokuapp.com/users', {
+        fetch('http://localhost:8000/users', {
             method: 'POST',
             body: JSON.stringify(formdata),
             headers: {
@@ -49,15 +53,15 @@ export default class SignUpForm extends Component {
             }
             data.json()
             .then((jsondata) => {
-                const token = jsondata.token
                 const cookies = new Cookies()
-                cookies.set('token', token)
-                cookies.set('user', jsondata.user.name)
+                cookies.set('token', jsondata.token);
+                cookies.set('user', jsondata.user.name);
+                cookies.set('personal_email', jsondata.user.personal_email);
+                cookies.set('work_email', jsondata.user.work_email);
+                cookies.set('short', jsondata.user.short);
                 this.props.signIn()
             })
-        })
-        
-        
+        }) 
     }
 
     render() {
@@ -74,10 +78,25 @@ export default class SignUpForm extends Component {
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="name" placeholder="Name" onChange={this.handleChange} />
                         </Form.Group>
-                        <Form.Group controlId="email">
-                            <Form.Label>Email address</Form.Label>
+                        <Form.Group controlId="personal_email">
+                            <Form.Label>Personal Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" onChange={this.handleChange} />
+                            <Form.Text className="text-muted">
+                                Required. This is the email address you will use to sign in.
+                            </Form.Text>
                         </Form.Group>
+                        <Form.Group controlId="work_email">
+                            <Form.Label>Work Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" onChange={this.handleChange} />
+                            <Form.Text className="text-muted">
+                                You can add a work email address if you like.
+                            </Form.Text>
+                        </Form.Group>
+                        <Form.Group controlId="phone_number">
+                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Control placeholder="Password" onChange={this.handleChange}/>
+                        </Form.Group>
+
                         <Form.Group controlId="password">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={this.handleChange}/>
