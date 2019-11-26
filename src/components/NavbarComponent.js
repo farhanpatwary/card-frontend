@@ -20,6 +20,7 @@ class NavbarComponent extends Component {
         cookies.remove('user');
         cookies.remove('personal_email');
         cookies.remove('work_email');
+        cookies.remove('phone_number');
         cookies.remove('short');
 
         this.props.signOut()
@@ -46,12 +47,16 @@ class NavbarComponent extends Component {
         }  
     }
 
+    logostyle = {
+        'fontFamily': 'Muli, sans-serif',
+        'letteSpacing': '3px'
+    }
     render() {
         return (
             <Navbar collapseOnSelect expand="lg"  bg="dark" variant="dark">
                 <Nav className="mr-auto">
                 </Nav>
-            <Navbar.Brand href="/">Card</Navbar.Brand>
+            <Navbar.Brand href="/" style={this.logostyle}>CARD</Navbar.Brand>
             <Navbar.Toggle/>
             <Nav className="mr-auto">
                 </Nav>
