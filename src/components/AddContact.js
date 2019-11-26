@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-
+import Cookies from 'universal-cookie';
 export default class AddContact extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +23,22 @@ export default class AddContact extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        const cookies = new Cookies();
+        const token = cookies.get('token');
+        fetch('http://localhost:8000/addcontact', {
+            method: 'POST',
+            body: JSON.stringify({
+                short: this.state.contact_id
+            }),
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(data => data.json())
+        .then(jsondata => console.log(jsondata))
+    
     }
     
     render() {
@@ -38,7 +54,7 @@ export default class AddContact extends Component {
                             This is the short code that the contact you want to add will have shared with you.
                         </Form.Text>
                     </Form.Group>
-                    <Button variant="outline-primary" type="submit">
+                    <Button variant="outline-primary" type="submit" block>
                         Add Contact
                     </Button>
                 </Form>
