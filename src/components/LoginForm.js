@@ -57,7 +57,7 @@ export default class LoginForm extends Component {
                             cookies.set('token', jsondata.token);
                             cookies.set('user', jsondata.user.name);
                             cookies.set('personal_email', jsondata.user.personal_email);
-                            cookies.set('work_email', jsondata.user.work_email);
+                            cookies.set('phone_number', jsondata.user.phone_number); 
                             cookies.set('short', jsondata.user.short);            
                             return this.props.signIn()
                         }
