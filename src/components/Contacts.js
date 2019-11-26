@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
+import Cookies from 'universal-cookie';
 
 import Contact from './Contact'
 
@@ -13,9 +14,21 @@ export class Contacts extends Component {
         };
     }
     componentDidMount(){
-            
+            const cookies = new Cookies();
+            const token = cookies.get('token');
+            fetch('http://localhost:8000/contacts', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(data => data.json())
+            .then(jsondata => this.setState({
+                contacts: jsondata,
+                loaded:true
+            }))
     }
-
 
     render() {
         if(this.state.loaded === false){
@@ -29,7 +42,7 @@ export class Contacts extends Component {
         }      
         else{
             const content = this.state.contacts.map((contact) => 
-                <Contact/>
+                <Contact data={contact} key={contact._id}/>
             )
             return (
                 <Container>
