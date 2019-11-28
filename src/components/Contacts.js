@@ -28,6 +28,7 @@ export class Contacts extends Component {
                 contacts: jsondata,
                 loaded:true
             }))
+            .catch(e => console.log(e))
     }
 
     render() {
@@ -41,16 +42,27 @@ export class Contacts extends Component {
             )
         }      
         else{
-            const content = this.state.contacts.map((contact) => 
+            if(this.state.contacts.length !== undefined){
+                const content = this.state.contacts.map((contact) => 
                 <Contact data={contact} key={contact._id}/>
-            )
-            return (
-                <Container>
-                    <br/>
-                    {content}
-                    <br/>
-                </Container>
-            )
+                )
+                return (
+                    <Container>
+                        <br/>
+                        {content}
+                        <br/>
+                    </Container>
+                )
+            } else {
+                return (
+                    <Container>
+                        <br/>
+                        A problem Occured. Please sign out and sign in again.
+                        <br/>
+                    </Container>
+                )
+            }
+            
         }
     }
 }
