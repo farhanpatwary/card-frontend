@@ -31,7 +31,6 @@ class NavbarComponent extends Component {
         if(this.props.signed_in === true){
             return (
                 <Nav className="justify-content-center">  
-                    <Nav.Link href="/me">My Account</Nav.Link>
                     <Nav.Link href="/settings">Settings</Nav.Link>
                     <Button variant="secondary" onClick={this.clickHandler}>Log Out</Button>
                 </Nav>
