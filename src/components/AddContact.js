@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Alert from 'react-bootstrap/Alert'
 import Cookies from 'universal-cookie';
 export default class AddContact extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contact_id: ''
+            contact_id: '',
+            error: '',
+            success: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,9 +39,36 @@ export default class AddContact extends Component {
                 'Authorization': `Bearer ${token}`
             }
         })
-        .then(data => data.json())
-        .then(jsondata => console.log(jsondata))
-    
+        .then(data => {
+            if(data.status === 500){
+                this.setState({
+                    error: 'User does not exist.'
+                })
+            } else {
+                data.json()
+                .then(jsondata => {
+                    if(jsondata.message){
+                        this.setState({
+                            error: 'User is already in contacts.'
+                        })
+                    } else {
+                        this.setState({
+                            error: '',
+                            success: true
+                        })
+                    }
+                })
+            }  
+        })
+    }
+
+    msg = () => {
+        if(this.state.error !== ''){
+            return (<Alert variant="danger">{this.state.error}</Alert>)
+        } 
+        if(this.state.success === true){
+            return (<Alert variant="success">Contact successfully added!</Alert>)
+        }
     }
     
     render() {
@@ -54,6 +84,7 @@ export default class AddContact extends Component {
                             This is the short code that the contact you want to add will have shared with you.
                         </Form.Text>
                     </Form.Group>
+                    {this.msg()}
                     <Button variant="outline-primary" type="submit" block>
                         Add Contact
                     </Button>
