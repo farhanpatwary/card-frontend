@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
             personal_email: this.state.personal_email,
             password: this.state.password
         }
-        fetch('http://localhost:8000/users/login', {
+        fetch('https://fast-card-api.herokuapp.com/users/login', {
                 method: 'POST',
                 body: JSON.stringify(formdata),
                 credentials: 'same-origin',

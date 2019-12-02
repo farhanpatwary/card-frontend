@@ -28,7 +28,7 @@ export default class AddContact extends Component {
         event.preventDefault();
         const cookies = new Cookies();
         const token = cookies.get('token');
-        fetch('http://localhost:8000/addcontact', {
+        fetch('https://fast-card-api.herokuapp.com/addcontact', {
             method: 'POST',
             body: JSON.stringify({
                 short: this.state.contact_id
@@ -56,6 +56,7 @@ export default class AddContact extends Component {
                             error: '',
                             success: true
                         })
+                        window.location.reload();
                     }
                 })
             }  

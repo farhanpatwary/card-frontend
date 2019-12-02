@@ -38,7 +38,7 @@ export default class SignUpForm extends Component {
             phone_number: this.state.phone_number,
             password: this.state.password
         }
-        fetch('http://localhost:8000/users', {
+        fetch('https://fast-card-api.herokuapp.com/users', {
             method: 'POST',
             body: JSON.stringify(formdata),
             headers: {

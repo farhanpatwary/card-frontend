@@ -16,7 +16,7 @@ export class Contacts extends Component {
     componentDidMount(){
             const cookies = new Cookies();
             const token = cookies.get('token');
-            fetch('http://localhost:8000/contacts', {
+            fetch('https://fast-card-api.herokuapp.com/contacts', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
