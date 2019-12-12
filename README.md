@@ -1,4 +1,4 @@
-#About this repository
+# About this repository
 This is the front end application for [Card](https://github.com/farhanpatwary/card), a digital business card I have built using the MERN Stack (MongoDB - Express.js - React.js - Node.js).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
