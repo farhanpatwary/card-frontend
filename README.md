@@ -1,7 +1,7 @@
 # About this repository
 This is the front end application for [Card](https://github.com/farhanpatwary/card), a digital business card I have built using the MERN Stack (MongoDB - Express.js - React.js - Node.js).
 If you want to try the deployed application click [Here](http://fast-card.herokuapp.com/).   
-Note that the application is deployed on heroku and may take up to a minute to load since the application closes after a period of inactivity.
+**Note that the application is deployed on heroku and may take up to a minute to load since the application closes after a period of inactivity.**
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
